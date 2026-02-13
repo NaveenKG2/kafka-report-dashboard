@@ -70,9 +70,7 @@ for app in filtered_df["App"].unique():
         }
     )
 
-    git
-    add
-    KafkaReport.py    # Update only changed rows (Status or Kafka)
+       # Update only changed rows (Status or Kafka)
     changed_rows = edited_app_df[
         (edited_app_df["Status"] != app_df["Status"]) |
         (edited_app_df["Kafka"] != app_df["Kafka"])
