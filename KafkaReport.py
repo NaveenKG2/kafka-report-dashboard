@@ -51,7 +51,7 @@ for app in filtered_df["App"].unique():
 
     # Single editable grid: only Status column editable
     edited_app_df = st.data_editor(
-        app_df.head(50)[["Sl.No", "Type", "Emp", "Kafka", "Status"]],
+        app_df.head(30)[["Sl.No", "Type", "Emp", "Kafka", "Status"]],
         hide_index=True,
         use_container_width=True,
         num_rows="fixed",
@@ -77,5 +77,5 @@ for app in filtered_df["App"].unique():
 
 # Save changes back to Excel
 if st.button("Save Changes"):
-    df.to_excel("KafkaReport_updated.xlsx", index=False)
-    st.success("Only edited rows saved to KafkaReport_updated.xlsx!")
+    df.to_excel("KafkaReport.xlsx", index=False)
+    st.success("Only edited rows saved to KafkaReport.xlsx!")
