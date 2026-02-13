@@ -62,7 +62,7 @@ for app in filtered_df["App"].unique():
             ),
             "Type": st.column_config.TextColumn(disabled=True, width="medium"),
             "Emp": st.column_config.TextColumn(disabled=True, width="medium"),
-            "Kafka": st.column_config.TextColumn(disabled=True, width="large"),
+            "Kafka": st.column_config.TextColumn(disabled=False, width="large"),
             "Status": st.column_config.TextColumn(
                 disabled=False,
                 width="large"   # wide enough to avoid wrapping
@@ -70,10 +70,18 @@ for app in filtered_df["App"].unique():
         }
     )
 
-    # Update only changed rows
-    changed_rows = edited_app_df[edited_app_df["Status"] != app_df["Status"]]
+    git
+    add
+    KafkaReport.py    # Update only changed rows (Status or Kafka)
+    changed_rows = edited_app_df[
+        (edited_app_df["Status"] != app_df["Status"]) |
+        (edited_app_df["Kafka"] != app_df["Kafka"])
+        ]
+
     for i, row in changed_rows.iterrows():
-        df.loc[app_df.loc[i, "index"], "Status"] = row["Status"]
+        row_index = app_df.loc[i, "index"]  # use your identifier column
+        df.loc[row_index, "Status"] = row["Status"]
+        df.loc[row_index, "Kafka"] = row["Kafka"]
 
 # Save changes back to Excel
 if st.button("Save Changes"):
