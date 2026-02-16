@@ -20,8 +20,8 @@ df = pd.read_excel("KafkaReport.xlsx", engine="openpyxl")
 
 df["App"] = df["App"].astype(str).str.strip()
 df["Sl.No"] = df.groupby("App").cumcount() + 1
-df["StatusCategory"] = df["Status"].str.lower().apply(
-    lambda x: "Completed" if "prod" in x else "Pending"
+df["StatusCategory"] = df["Status"].apply(
+    lambda x: "Completed" if isinstance(x, str) and "in prod" in x.lower() else "Pending"
 )
 
 st.title("Kafka Report Dashboard")
@@ -70,7 +70,7 @@ for app in filtered_df["App"].unique():
         }
     )
 
-       # Update only changed rows (Status or Kafka)
+    # Update only changed rows (Status or Kafka)
     changed_rows = edited_app_df[
         (edited_app_df["Status"] != app_df["Status"]) |
         (edited_app_df["Kafka"] != app_df["Kafka"])
